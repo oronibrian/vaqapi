@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import Job, Bid, GeoLocation, Notification, Wallet, Transactions
+from django.contrib.auth.hashers import make_password
 
 # Auth Serializer
 
@@ -21,14 +22,16 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             'is_staff',
         ]
 
-        def create(self, validated_data):
-            user = User(
-                email=validated_data["email"],
-                username=validated_data["username"]
-            )
-            user.set_password(validated_data["password"])
-            user.save()
-            return user
+    def validate(self, attrs):
+        password = attrs['password']
+        if len(password) < 9:
+            raise serializers.ValidationError("password is too short.")
+        return attrs
+
+    def create(self, validated_data):
+        ModelClass = self.Meta.model
+        instance = ModelClass.objects.create_user(**validated_data)
+        return instance
 
 
 # Job Serializer
