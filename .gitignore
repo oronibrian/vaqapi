@@ -1,0 +1,12 @@
+ngo ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+
+.env
+# Database stuff
+*.sqlite3
+migrations/
+db.sqlite3

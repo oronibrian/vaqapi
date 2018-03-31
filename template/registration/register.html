@@ -1,0 +1,91 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>{{title}}</title>
+
+
+    <link href="{% static 'assets/demo.css' %}" rel="stylesheet">
+       <link href="{% static 'assets/form-mini.css' %}" rel="stylesheet">
+
+
+</head>
+
+
+    <ul>
+        <li><a href="{% url 'posts:index' %}">Splash Home</a></li>
+        <li><a href="{% url 'userauth:login' %}" >Login</a></li>
+        <li><a href="{% url 'userauth:registerpage' %}" class="active">Registration</a></li>
+
+
+    </ul>
+
+
+    <div class="main-content">
+
+        <!-- You only need this form and the form-mini.css -->
+
+
+        <div class="form-mini-container">
+
+
+            <h1>{{title}}</h1>
+
+            <form class="form-mini" action='' method="post" >
+            {% csrf_token %}
+
+                <div class="form-row">
+                     <label>
+                            <span>Username</span>
+                            {{ form.username }}
+                        </label>
+                </div>
+
+                <div class="form-row">
+                     <label>
+                            <span>Email</span>
+                            {{ form.email }}
+                        </label>
+                </div>
+
+                <div class="form-row">
+                     <label>
+                            <span>Confirm Email</span>
+                            {{ form.email2 }}
+                        </label>
+                </div>
+
+                <div class="form-row">
+                    <label>
+                            <span>Password</span>
+                            {{ form.password }}
+                        </label>
+                </div>
+
+                <div class="form-row form-last-row">
+                    <button type="submit">Submit</button>
+                </div>
+
+            </form>
+        </div>
+
+
+
+          {% if messages %}
+            {% for message in messages %}
+              {{ message }}
+            {% endfor %}
+          {% endif %}
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+
+
+
+    <div class="main-content">
+
+        <!-- You only need this form and the form-mini.css -->
+
+        <div class="form-mini-container">
+
+
+            <h1>{{title}}</h1>
+
+            <form class="form-mini" action='' method="post" >
+            {% csrf_token %}
+
+                <div class="form-row">
+                     <label>
+                            <span>Username</span>
+                            {{ form.username }}
+                        </label>
+                </div>
+
+                <div class="form-row">
+                    <label>
+                            <span>Password</span>
+                            {{ form.password }}
+                        </label>
+                </div>
+
+                <div class="form-row form-last-row">
+                    <button type="submit">Login</button>
+                </div>
+
+            </form>
+        </div>
+
+
+    </div>
