@@ -40,11 +40,9 @@ class JobSerializer(serializers.ModelSerializer):
     class Meta:
         model = Job
         fields = [
-            'pk',
             'title',
             'description',
             'status',
-            'employer'
         ]
 
 
