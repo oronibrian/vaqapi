@@ -6,7 +6,7 @@ from Api import views
 
 
 urlpatterns = [
-    # url(r'^users$', views.UserViewSet.as_view(), name='users'),   
+     url(r'^login/$', views.userLoginViewSet.as_view(), name='login '),   
     # url(r'^(?P<pk>\d+)/$', views.JobViewSet.as_view(), name='jobs'),   
 
     

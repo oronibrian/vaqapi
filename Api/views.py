@@ -25,7 +25,7 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 
-class userLoginViewSet(viewsets.ModelViewSet):
+class userLoginViewSet(APIView):
     permission_classes =[AllowAny]
     queryset = User.objects.all()
 
