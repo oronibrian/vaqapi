@@ -24,6 +24,7 @@ router.register(r'notification', views.NotificationViewSet)
 router.register(r'geolocation', views.GeolocationViewSet)
 router.register(r'wallet', views.WalletViewSet)
 router.register(r'transaction', views.TransactionsViewSet)
+router.register(r'login',views.userLoginViewSet)
 
 urlpatterns = [
     url(r'^$', schema_view),
@@ -33,6 +34,9 @@ urlpatterns = [
     url(r'accounts/', include('django.contrib.auth.urls')),
     # url(r'^$', RedirectView.as_view(permanent=False, url='/api/'))
     url(r'^api/token/', obtain_jwt_token),
+    # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+
+
 
     
 

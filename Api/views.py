@@ -6,10 +6,14 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from rest_framework import viewsets
 from rest_framework import generics
-from .serializers import UserSerializer, JobSerializer, BidSerializer, NotificationSerializer, GeolocationSerializer, WalletSerializer, TransactionsSerializer
+from .serializers import UserSerializer, JobSerializer, BidSerializer,UserLoginSerializer, NotificationSerializer, GeolocationSerializer, WalletSerializer, TransactionsSerializer
 from .models import Job, Bid, Notification, GeoLocation, Wallet, Transactions
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.permissions import IsAdminUser
+from rest_framework.status import HTTP_200_OK,HTTP_400_BAD_REQUEST
+from rest_framework .view import APIView
+from rest_framework .response import Response
+from rest_framework.permissions import AllowAny
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -19,6 +23,19 @@ class UserViewSet(viewsets.ModelViewSet):
     look_up_field = 'pk'
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+class userLoginViewSet(APIView):
+    permission_classes =[AllowAny]
+
+    def post(self,request,*args,**kwargs):
+        data= request.data
+        serializer = UserLoginSerializer(data=data)
+        if serializer.is_valid(raise_exception=True):
+            new_data= serializer.data
+            return Response(new_data,status=HTTP_200_OK)
+        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+
 
 
 class JobViewSet(viewsets.ModelViewSet):

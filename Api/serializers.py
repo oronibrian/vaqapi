@@ -34,6 +34,24 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         return instance
 
 
+
+#Login serializer
+class UserLoginSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = User
+        fields = [
+            
+            'username',
+            'password',
+        ]
+
+    def validate(self, data):
+        # password = attrs['password']
+        # if len(password) < 9:
+        #     raise serializers.ValidationError("password is too short.")
+        return data
+
 # Job Serializer
 class JobSerializer(serializers.ModelSerializer):
 
