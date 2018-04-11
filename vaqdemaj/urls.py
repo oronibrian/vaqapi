@@ -34,7 +34,7 @@ urlpatterns = [
     url(r'accounts/', include('django.contrib.auth.urls')),
     # url(r'^$', RedirectView.as_view(permanent=False, url='/api/'))
     url(r'^api/token/', obtain_jwt_token),
-    url(r'^user/', include('Api.urls', namespace='login'))
+    url(r'^login/$', views.userLoginViewSet.as_view(), name='login '),   
 
 
 
