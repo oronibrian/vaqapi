@@ -24,7 +24,7 @@ router.register(r'notification', views.NotificationViewSet)
 router.register(r'geolocation', views.GeolocationViewSet)
 router.register(r'wallet', views.WalletViewSet)
 router.register(r'transaction', views.TransactionsViewSet)
-router.register(r'login',views.userLoginViewSet)
+router.register(r'login',views.userLoginViewSet,'login')
 
 urlpatterns = [
     url(r'^$', schema_view),
