@@ -2,6 +2,10 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import Job, Bid, GeoLocation, Notification, Wallet, Transactions
 from django.contrib.auth.hashers import make_password
+from django.db.models import Q
+from rest_framework.views import exception_handler
+from django.core.exceptions import ValidationError
+
 
 # Auth Serializer
 
@@ -19,7 +23,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             'first_name',
             'last_name',
             'is_active',
-            'is_staff',
+            'is_staff', 
         ]
 
     def validate(self, attrs):
@@ -36,7 +40,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 #Login serializer
-class UserLoginSerializer(serializers.HyperlinkedModelSerializer):
+class UserLoginSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
@@ -47,9 +51,27 @@ class UserLoginSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
     def validate(self, data):
-        # password = attrs['password']
-        # if len(password) < 9:
-        #     raise serializers.ValidationError("password is too short.")
+        user_obj=None
+        username=data.get('username',None)
+        password= data["password"]
+        if not username:
+            raise ValidationError('Username is empty')
+
+        user = User.objects.filter(
+                Q(username=username)
+            ).distinct()
+
+        if user.exists() and user.count()==1:
+            user_obj=user.first()
+        else:
+            raise ValidationError('The username does not exist')
+        
+        if user_obj:
+            if not user_obj.check_password(password):
+                raise ValidationError('Incorrect Credential')
+
+
+        
         return data
 
 # Job Serializer
