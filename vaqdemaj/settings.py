@@ -41,6 +41,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_swagger',
     'Api',
+    'rest_auth',
+    'rest_auth.registration',
+     'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+
+
 ]
 
 MIDDLEWARE = [
@@ -156,8 +163,8 @@ REST_FRAMEWORK = {
 
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
+    #     'rest_framework.authentication.SessionAuthentication',
+    #     'rest_framework.authentication.BasicAuthentication',
     ),
 
 }
@@ -169,3 +176,5 @@ JWT_AUTH = {
     'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
 
 }
+REST_USE_JWT = True
+SITE_ID = 1
