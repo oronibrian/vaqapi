@@ -61,8 +61,7 @@ class BidsList(viewsets.ModelViewSet):
 
 
 class NotificationViewSet(viewsets.ModelViewSet):
-    permission_classes=(IsAuthenticated)
-    authentication_classes=(BasicAuthentication,SessionAuthentication)
+   
     queryset = Notification.objects.all()
     look_up_field = 'pk'
     serializer_class = NotificationSerializer
@@ -74,12 +73,10 @@ class GeolocationViewSet(viewsets.ModelViewSet):
 
 
 class WalletViewSet(viewsets.ModelViewSet):
-    permission_classes =[IsAuthenticated]
     queryset = Wallet.objects.all()
     serializer_class = WalletSerializer
 
 
 class TransactionsViewSet(viewsets.ModelViewSet):
-    permission_classes =[IsAuthenticated]
     queryset = Transactions.objects.all()
     serializer_class = TransactionsSerializer
